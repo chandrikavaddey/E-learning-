@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Python - LearnHub</title>
+  <title>Machine Learning - LearnHub</title>
   <style>
-    body {
+   body {
       margin: 0;
       font-family: Arial, sans-serif;
       display: flex;
@@ -14,12 +14,31 @@
     }
 
     header {
-      background-color: #2C7D89;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color:#2C7D89;
       color: white;
-      padding: 1em;
-      text-align: center;
+      width: 100%;
+      position: fixed;
+      z-index: 1000;
+      height: 60px;
+      top: 0;
     }
-
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+    }
     .container {
       display: flex;
       flex: 1;
@@ -28,40 +47,39 @@
     .sidebar {
       width: 250px;
       background-color: #2C7D89;
-      color: white;
-      padding: 1em;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      position: relative;
-      transition: transform 0.3s ease-in-out;
+      position: fixed;
+      height: 100%;
+      top: 0;
+      left: 0;
+      padding-top: 60px; /* Push below header */
     }
-
     .sidebar.hide {
       transform: translateX(-100%);
     }
+    .nav-links ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px; /* Add margin-top to push the lessons down */
+}
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sidebar ul li {
-      margin: 10px 0;
-    }
-
-    .sidebar ul li a {
-      color: white;
-      text-decoration: none;
-      cursor: pointer;
+.nav-links ul li {
+  margin: 10px 0; /* Optional, you can adjust this margin for spacing between list items */
+}
+    .nav-links ul li a {
       display: block;
       padding: 10px;
+      color: white;
+      text-decoration: none;
       border-radius: 5px;
       transition: background 0.3s;
     }
 
-    .sidebar ul li a:hover {
-      background: #575757;
+    .nav-links ul li a:hover {
+      background: #555;
     }
 
+   
+    
     .progress-overall {
       margin-top: 20px;
       padding: 10px;
@@ -69,6 +87,12 @@
       border-radius: 10px;
       color: white;
       text-align: center;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+      margin-top: 120px; /* Increased margin-top for more space */
+      flex-grow: 1;
     }
 
     .content {
@@ -79,6 +103,12 @@
 
     .lesson-container {
       display: none;
+    }
+    .lesson {
+      padding: 20px;
+      margin: 20px 0;
+      background-color: #f4f4f4;
+      border-radius: 5px;
     }
 
     iframe {
@@ -147,37 +177,55 @@
       background: #575757;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
+   
 
+      /* Mobile view styles */
+      @media (max-width: 768px) {
       .sidebar {
-        width: 100%;
+        display: none; /* Hide sidebar on mobile */
+      }
+
+      .menu-toggle {
+        display: block; /* Show menu icon on mobile */
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #2C7D89;
         position: absolute;
-        top: 0;
+        top: 60px;
         left: 0;
-        height: 100%;
-        transform: translateX(-100%);
+        width: 250px;
+        height: calc(100vh - 60px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       }
 
-      .sidebar.show {
-        transform: translateX(0);
+      .nav-links.show {
+        display: flex;
       }
 
-      .content {
+      .main-content {
         margin-left: 0;
+        padding-top: 80px;
       }
+      .nav-links ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2px; /* Add margin-top to push the lessons down */
+}
     }
   </style>
 </head>
 <body>
   
   <header>
-    <h1> Machine Learning - LearnHub</h1>
+    <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="logo">Machine Learning-Topics</div>
   </header>
-  <div class="container">
-    <div id="sidebar" class="sidebar">
+
+  <div class="sidebar nav-links ">
+    
       <h2>Topics</h2>
       <ul>
         <li><a onclick="showLesson(1)">Introduction to Machine Learning</a></li>
@@ -193,7 +241,7 @@
         Overall Progress: 0%
       </div>
     </div>
-    <div class="content">
+    <div class="main-content">
         <!-- Lesson 1 -->
         <div id="lesson-1" class="lesson-container">
             <h2>Introduction to Machine Learning</h2>
@@ -500,9 +548,21 @@
       document.getElementById("overall-progress").innerText = `Overall Progress: ${overallProgress}%`;
     }
 
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("hide");
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('show');
+    });
+
+    // Show Selected Lesson
+    function showLesson(lessonId) {
+      const lessonContainers = document.querySelectorAll('.lesson-container');
+      lessonContainers.forEach(container => (container.style.display = 'none'));
+      const selectedLesson = document.getElementById(`lesson-${lessonId}`);
+      if (selectedLesson) selectedLesson.style.display = 'block';
+
+      // Close Sidebar on Mobile After Selection
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.remove('show');
     }
   </script>
 </body>
