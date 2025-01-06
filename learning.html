@@ -261,6 +261,19 @@
         fill: #fff;
       }
 }
+        @media (min-width: 768px) {
+    .course-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .course-container {
+        grid-template-columns: 1fr; /* Display one course per row */
+        gap: 20px; /* Adjust the gap between the cards */
+    }
+}
 
     </style>
 </head>
