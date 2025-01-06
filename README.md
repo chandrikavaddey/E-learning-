@@ -12,28 +12,7 @@
             font-family: 'Arial', sans-serif;
         }
 
-        /* Navigation */
-        .navbar {
-            background-color: #fff; /* Background color for the navbar */
-            padding: 10px; /* Padding for the navbar */
-            text-align: right; /* Align text to the right */
-        }
-
-        .navbar a {
-            color:#333;
-         /* Text color for the links */
-            text-decoration: none;
-            margin-left: 20px; /* Spacing between links */
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-        }
+      
 
         /* Hero Section */
         .hero {
@@ -474,15 +453,7 @@ h1 {
                 max-width: calc(100% - 1rem);
             }
 
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+           
             .hero-image{
                 width: 100%;
                 height: 100%;
@@ -573,19 +544,148 @@ h1 {
             }
         }
 
+        header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgb(94, 200, 235);
+      color: #fff;
+      padding: 10px 20px;
+    }
 
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-left img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+    }
+
+    .menu-icon {
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: block;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background-color: blue;
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      width: auto;
+      z-index: 10;
+      padding: 5px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px orange(0, 0, 0, 0.2);
+    }
+
+    .mobile-nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .mobile-nav ul li {
+      margin: 0;
+    }
+
+    .mobile-nav ul li a {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #fff;
+      text-decoration: none;
+      background-color: rgb(166, 166, 222);
+      border-radius: 5px;
+      text-align: left;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .mobile-nav ul li a:hover {
+      background-color: #f39c12;
+      transform: translateY(-2px);
+    }
+
+    .mobile-nav ul li a svg {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .desktop-nav {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .menu-icon, .mobile-nav {
+        display: none;
+      }
+
+      .desktop-nav {
+        display: flex;
+        gap: 20px;
+      }
+
+      .desktop-nav a {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 10px 15px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .desktop-nav a:hover {
+        background-color: rgb(172, 172, 227);
+        color: blue;
+        border-radius: 5px;
+      }
+
+      .desktop-nav a svg {
+        margin-right: 8px;
+        width: 20px;
+        height: 20px;
+        fill: #fff;
+      }
+    }
 
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        
-        <a href="index.html">&#127968; Home</a> 
-        <a href="Explore.html">&#128270; Explore</a> 
-        <a href="Courses.html">&#128218; Courses</a> 
-        <a href="signin.html">&#128100; Profile</a> 
-    </nav>
-    </nav>
+    <header>
+        <div class="header-left">
+          <!-- <img src="https://via.placeholder.com/40" alt="Header Icon" /> -->
+          <div class="logo">Learn Hub</div>
+        </div>
+        <div class="menu-icon" onclick="toggleMobileMenu()">☰</div>
+        <nav class="mobile-nav">
+          <ul>
+            <li><a href="#home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home</a></li>
+            <li><a href="Explore.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm1 17.93V13h4.64A8 8 0 0113 19.93zM11 19.93A8 8 0 016.36 13H11zm6.64-11H13V4.07A8 8 0 0117.64 8.93zM11 4.07V9H6.36A8 8 0 0111 4.07z"/></svg>Explore</a></li>
+            <li><a href="learning.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 2H2v2h20zm0 4H2v2h20zm0 4H2v8h6v2h8v-2h6zM9 18v-4h6v4z"/></svg>Courses</a></li>
+            <li><a href="#profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12a5 5 0 10-5-5 5 5 0 005 5zm0 2c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>Profile</a></li>
+          </ul>
+        </nav>
+        <nav class="desktop-nav">
+          <a href="#home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home</a>
+          <a href="Explore.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm1 17.93V13h4.64A8 8 0 0113 19.93zM11 19.93A8 8 0 016.36 13H11zm6.64-11H13V4.07A8 8 0 0117.64 8.93zM11 4.07V9H6.36A8 8 0 0111 4.07z"/></svg>Explore</a>
+          <a href="learning.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 2H2v2h20zm0 4H2v2h20zm0 4H2v8h6v2h8v-2h6zM9 18v-4h6v4z"/></svg>Courses</a>
+          <a href="#profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12a5 5 0 10-5-5 5 5 0 005 5zm0 2c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>Profile</a>
+        </nav>
+      </header>
     
     <section class="hero">
         <div class="hero-content">
@@ -662,10 +762,20 @@ h1 {
         <p style="text-align: center; color: white; ">&copy; 2025 <a href="index.html" class="text-light">LearnHub</a>. All rights reserved.</p>
     </div>
 
-    <script>   function toggleMenu() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('active'); // Toggles the active class
+    <script>  
+     function toggleMobileMenu() {
+      const mobileNav = document.querySelector('.mobile-nav');
+      mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
     }
+
+    // Close mobile menu when switching to desktop mode
+    window.addEventListener('resize', () => {
+      const mobileNav = document.querySelector('.mobile-nav');
+      if (window.innerWidth >= 768) {
+        mobileNav.style.display = 'none';
+      }
+    }); 
+    
 <!-- Footer End -->
 
     </script>
