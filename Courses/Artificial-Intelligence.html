@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Python - LearnHub</title>
+  <title>Cyber security - E-Learning Platform</title>
   <style>
     body {
       margin: 0;
@@ -14,12 +14,31 @@
     }
 
     header {
-      background-color: #2C7D89;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color:#2C7D89;
       color: white;
-      padding: 1em;
-      text-align: center;
+      width: 100%;
+      position: fixed;
+      z-index: 1000;
+      height: 60px;
+      top: 0;
     }
-
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+    }
     .container {
       display: flex;
       flex: 1;
@@ -28,40 +47,39 @@
     .sidebar {
       width: 250px;
       background-color: #2C7D89;
-      color: white;
-      padding: 1em;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      position: relative;
-      transition: transform 0.3s ease-in-out;
+      position: fixed;
+      height: 100%;
+      top: 0;
+      left: 0;
+      padding-top: 60px; /* Push below header */
     }
-
     .sidebar.hide {
       transform: translateX(-100%);
     }
+    .nav-links ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px; /* Add margin-top to push the lessons down */
+}
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sidebar ul li {
-      margin: 10px 0;
-    }
-
-    .sidebar ul li a {
-      color: white;
-      text-decoration: none;
-      cursor: pointer;
+.nav-links ul li {
+  margin: 10px 0; /* Optional, you can adjust this margin for spacing between list items */
+}
+    .nav-links ul li a {
       display: block;
       padding: 10px;
+      color: white;
+      text-decoration: none;
       border-radius: 5px;
       transition: background 0.3s;
     }
 
-    .sidebar ul li a:hover {
-      background: #575757;
+    .nav-links ul li a:hover {
+      background: #555;
     }
 
+   
+    
     .progress-overall {
       margin-top: 20px;
       padding: 10px;
@@ -69,6 +87,12 @@
       border-radius: 10px;
       color: white;
       text-align: center;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+      margin-top: 120px; /* Increased margin-top for more space */
+      flex-grow: 1;
     }
 
     .content {
@@ -79,6 +103,12 @@
 
     .lesson-container {
       display: none;
+    }
+    .lesson {
+      padding: 20px;
+      margin: 20px 0;
+      background-color: #f4f4f4;
+      border-radius: 5px;
     }
 
     iframe {
@@ -147,290 +177,312 @@
       background: #575757;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
+   
 
+      /* Mobile view styles */
+      @media (max-width: 768px) {
       .sidebar {
-        width: 100%;
+        display: none; /* Hide sidebar on mobile */
+      }
+
+      .menu-toggle {
+        display: block; /* Show menu icon on mobile */
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #2C7D89;
         position: absolute;
-        top: 0;
+        top: 60px;
         left: 0;
-        height: 100%;
-        transform: translateX(-100%);
+        width: 250px;
+        height: calc(100vh - 60px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       }
 
-      .sidebar.show {
-        transform: translateX(0);
+      .nav-links.show {
+        display: flex;
       }
 
-      .content {
+      .main-content {
         margin-left: 0;
+        padding-top: 80px;
       }
+      .nav-links ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2px; /* Add margin-top to push the lessons down */
+}
     }
   </style>
 </head>
 <body>
   
   <header>
-    <h1> Artificial Intelligence- LearnHub</h1>
+    <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="logo">Cyber Security-Topics</div>
   </header>
-  <div class="container">
-    <div id="sidebar" class="sidebar">
-      <h2>Topics</h2>
-      <ul>
-        <li><a onclick="showLesson(1)">Introduction to Artificial Intelligence </a></li>
-        <li><a onclick="showLesson(2)">Machine Learning Basics</a></li>
-        <li><a onclick="showLesson(3)">Neural Networks</a></li>
-        <li><a onclick="showLesson(4)">Deep Learning</a></li>
-        <li><a onclick="showLesson(5)">Natural Language Processing</a></li>
-        <li><a onclick="showLesson(6)">Computer Vision</a></li>
-        <li><a onclick="showLesson(7)">Reinforcement Learning</a></li>
-        <li><a onclick="showLesson(8)">AI Ethics and Future</a></li>
-      </ul>
-      <div id="overall-progress" class="progress-overall">
-        Overall Progress: 0%
-      </div>
+
+  <div class="sidebar nav-links ">
+    
+        <h2>Topics</h2>
+        <ul>
+            <li><a onclick="showLesson(1)">Introduction to Cybersecurity</a></li>
+            <li><a onclick="showLesson(2)">Types of Cyber Threats</a></li>
+            <li><a onclick="showLesson(3)">Network Security Basics</a></li>
+            <li><a onclick="showLesson(4)">Cryptography and Encryption</a></li>
+            <li><a onclick="showLesson(5)">Web Security & OWASP</a></li>
+            <li><a onclick="showLesson(6)">Incident Response & Forensics</a></li>
+            <li><a onclick="showLesson(7)">Ethical Hacking Basics</a></li>
+            <li><a onclick="showLesson(8)">Advanced Cybersecurity: Threat Hunting</a></li>
+        </ul>
+        <div id="overall-progress" class="progress-overall">
+            Overall Progress: 0%
+        </div>
     </div>
-    <div class="content">
+
+    <div class="main-content">
         <!-- Lesson 1 -->
         <div id="lesson-1" class="lesson-container">
-            <h2>Introduction to Artificial Intelligence</h2>
-            <iframe id="video-1" src="https://www.youtube.com/embed/2ePf9rue1Ao" allowfullscreen></iframe>
+            <h2>Introduction to Cybersecurity</h2>
+            <iframe id="video-1" src="https://www.youtube.com/embed/1nfcXbflSHs?autoplay=1" allowfullscreen></iframe>
             <button onclick="unlockQuiz(1)">Complete Video</button>
-    
+
             <div id="quiz-1" class="quiz">
-                <h3>Quiz: Introduction to Artificial Intelligence</h3>
+                <h3>Quiz: Introduction to Cybersecurity</h3>
                 <div id="question-1" class="question"></div>
                 <ul id="options-1" class="quiz-options"></ul>
                 <button onclick="nextQuestion(1)" id="next-btn-1">Next</button>
             </div>
-    
+
             <div id="result-1" class="result"></div>
             <div id="progress-tracker-1" class="progress-tracker"></div>
         </div>
-    
+
         <!-- Lesson 2 -->
         <div id="lesson-2" class="lesson-container">
-            <h2>Machine Learning Basics</h2>
-            <iframe id="video-2" src="https://www.youtube.com/embed/GwIo3gDZCVQ" allowfullscreen></iframe>
+            <h2>Types of Cyber Threats</h2>
+            <iframe id="video-2" src="https://www.youtube.com/embed/KwCoQyx7DL8" allowfullscreen></iframe>
             <button onclick="unlockQuiz(2)">Complete Video</button>
-    
+
             <div id="quiz-2" class="quiz">
-                <h3>Quiz: Machine Learning Basics</h3>
+                <h3>Quiz: Types of Cyber Threats</h3>
                 <div id="question-2" class="question"></div>
                 <ul id="options-2" class="quiz-options"></ul>
                 <button onclick="nextQuestion(2)" id="next-btn-2">Next</button>
             </div>
-    
+
             <div id="result-2" class="result"></div>
             <div id="progress-tracker-2" class="progress-tracker"></div>
         </div>
-    
+
         <!-- Lesson 3 -->
         <div id="lesson-3" class="lesson-container">
-            <h2>Neural Networks</h2>
-            <iframe id="video-3" src="https://www.youtube.com/embed/aircAruvnKk" allowfullscreen></iframe>
+            <h2>Network Security Basics</h2>
+            <iframe id="video-3" src="https://www.youtube.com/embed/cpzIqSgnoPA" allowfullscreen></iframe>
             <button onclick="unlockQuiz(3)">Complete Video</button>
-    
+
             <div id="quiz-3" class="quiz">
-                <h3>Quiz: Neural Networks</h3>
+                <h3>Quiz: Network Security Basics</h3>
                 <div id="question-3" class="question"></div>
                 <ul id="options-3" class="quiz-options"></ul>
                 <button onclick="nextQuestion(3)" id="next-btn-3">Next</button>
             </div>
-    
+
             <div id="result-3" class="result"></div>
             <div id="progress-tracker-3" class="progress-tracker"></div>
         </div>
-    
+
         <!-- Lesson 4 -->
         <div id="lesson-4" class="lesson-container">
-            <h2>Deep Learning</h2>
-            <iframe id="video-4" src="https://www.youtube.com/embed/JgvyzIkgxF0" allowfullscreen></iframe>
+            <h2>Cryptography and Encryption</h2>
+            <iframe id="video-4" src="https://www.youtube.com/embed/4T8zY2XPVzg" allowfullscreen></iframe>
             <button onclick="unlockQuiz(4)">Complete Video</button>
-    
+
             <div id="quiz-4" class="quiz">
-                <h3>Quiz: Deep Learning</h3>
+                <h3>Quiz: Cryptography and Encryption</h3>
                 <div id="question-4" class="question"></div>
                 <ul id="options-4" class="quiz-options"></ul>
                 <button onclick="nextQuestion(4)" id="next-btn-4">Next</button>
             </div>
-    
+
             <div id="result-4" class="result"></div>
             <div id="progress-tracker-4" class="progress-tracker"></div>
         </div>
-    
+
         <!-- Lesson 5 -->
         <div id="lesson-5" class="lesson-container">
-            <h2>Natural Language Processing</h2>
-            <iframe id="video-5" src="https://www.youtube.com/embed/8zI5gIHVsNs" allowfullscreen></iframe>
+            <h2>Web Security & OWASP</h2>
+            <iframe id="video-5" src="https://www.youtube.com/embed/9wYyb9pDwz4" allowfullscreen></iframe>
             <button onclick="unlockQuiz(5)">Complete Video</button>
-    
+
             <div id="quiz-5" class="quiz">
-                <h3>Quiz: Natural Language Processing</h3>
+                <h3>Quiz: Web Security & OWASP</h3>
                 <div id="question-5" class="question"></div>
                 <ul id="options-5" class="quiz-options"></ul>
                 <button onclick="nextQuestion(5)" id="next-btn-5">Next</button>
             </div>
-    
+
             <div id="result-5" class="result"></div>
             <div id="progress-tracker-5" class="progress-tracker"></div>
         </div>
-    
+
         <!-- Lesson 6 -->
         <div id="lesson-6" class="lesson-container">
-            <h2>Computer Vision</h2>
-            <iframe id="video-6" src="https://www.youtube.com/embed/eyovmAtoUx0" allowfullscreen></iframe>
+            <h2>Incident Response & Forensics</h2>
+            <iframe id="video-6" src="https://www.youtube.com/embed/po7UQ6zXJ_4" allowfullscreen></iframe>
             <button onclick="unlockQuiz(6)">Complete Video</button>
-    
+
             <div id="quiz-6" class="quiz">
-                <h3>Quiz: Computer Vision</h3>
+                <h3>Quiz: Incident Response & Forensics</h3>
                 <div id="question-6" class="question"></div>
                 <ul id="options-6" class="quiz-options"></ul>
                 <button onclick="nextQuestion(6)" id="next-btn-6">Next</button>
             </div>
-    
+
             <div id="result-6" class="result"></div>
             <div id="progress-tracker-6" class="progress-tracker"></div>
         </div>
-    
+
         <!-- Lesson 7 -->
         <div id="lesson-7" class="lesson-container">
-            <h2>Reinforcement Learning</h2>
-            <iframe id="video-7" src="https://www.youtube.com/embed/2pWv7GOvuf0" allowfullscreen></iframe>
+            <h2>Ethical Hacking Basics</h2>
+            <iframe id="video-7" src="https://www.youtube.com/embed/24tiw3xn1o4" allowfullscreen></iframe>
             <button onclick="unlockQuiz(7)">Complete Video</button>
-    
+
             <div id="quiz-7" class="quiz">
-                <h3>Quiz: Reinforcement Learning</h3>
+                <h3>Quiz: Ethical Hacking Basics</h3>
                 <div id="question-7" class="question"></div>
                 <ul id="options-7" class="quiz-options"></ul>
                 <button onclick="nextQuestion(7)" id="next-btn-7">Next</button>
             </div>
-    
+
             <div id="result-7" class="result"></div>
             <div id="progress-tracker-7" class="progress-tracker"></div>
         </div>
-    
+
         <!-- Lesson 8 -->
         <div id="lesson-8" class="lesson-container">
-            <h2>AI Ethics and Future</h2>
-            <iframe id="video-8" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            <h2>Advanced Cybersecurity: Threat Hunting</h2>
+            <iframe id="video-8" src="https://www.youtube.com/embed/dAZ2oyQplHs" allowfullscreen></iframe>
             <button onclick="unlockQuiz(8)">Complete Video</button>
-    
+
             <div id="quiz-8" class="quiz">
-                <h3>Quiz: AI Ethics and Future</h3>
+                <h3>Quiz: Advanced Cybersecurity: Threat Hunting</h3>
                 <div id="question-8" class="question"></div>
                 <ul id="options-8" class="quiz-options"></ul>
                 <button onclick="nextQuestion(8)" id="next-btn-8">Next</button>
             </div>
-    
+
             <div id="result-8" class="result"></div>
             <div id="progress-tracker-8" class="progress-tracker"></div>
         </div>
     </div>
-    <script>
-        const lessons = [
-          {
-            id: 1,
-            title: "Introduction to Artificial Intelligence",
-            quiz: [
-              { question: "What is Artificial Intelligence?", options: ["A branch of physics", "A study of algorithms", "A field of computer science", "An OS"], correct: 2 },
-              { question: "AI is used for...", options: ["Data analysis", "Machine learning", "Predictive analytics", "All of the above"], correct: 3 },
-              { question: "Which of these is a tool used in AI?", options: ["TensorFlow", "React", "Photoshop", "Notepad"], correct: 0 },
-              { question: "Who is known as the father of Artificial Intelligence?", options: ["Guido van Rossum", "John McCarthy", "Dennis Ritchie", "Bjarne Stroustrup"], correct: 1 },
-              { question: "What type of data is used in AI?", options: ["Structured", "Unstructured", "Semi-structured", "All of the above"], correct: 3 },
-            ],
-            completed: false
-          },
-          {
-            id: 2,
-            title: "Machine Learning Basics",
-            quiz: [
-              { question: "Which library is used for machine learning in Python?", options: ["TensorFlow", "Pandas", "Matplotlib", "Scikit-learn"], correct: 3 },
-              { question: "What is supervised learning?", options: ["Learning from labeled data", "Learning from unlabeled data", "Both A and B", "None of the above"], correct: 0 },
-              { question: "What is unsupervised learning?", options: ["Learning from labeled data", "Learning from unlabeled data", "Both A and B", "None of the above"], correct: 1 },
-              { question: "Which library is used for deep learning?", options: ["TensorFlow", "Pandas", "NumPy", "Matplotlib"], correct: 0 },
-              { question: "What does EDA stand for?", options: ["Extended Data Analysis", "Exploratory Data Analysis", "Extreme Data Analysis", "Extra Data Analysis"], correct: 1 },
-            ],
-            completed: false
-          },
-          {
-            id: 3,
-            title: "Neural Networks",
-            quiz: [
-              { question: "What is a Neural Network?", options: ["A type of algorithm", "A database system", "A network of computers", "None of the above"], correct: 0 },
-              { question: "Which library is commonly used for Neural Networks?", options: ["Keras", "Matplotlib", "Scikit-learn", "NumPy"], correct: 0 },
-              { question: "What is the first layer in a Neural Network?", options: ["Input Layer", "Hidden Layer", "Output Layer", "Activation Layer"], correct: 0 },
-              { question: "Which function is used to activate neurons?", options: ["Activation Function", "Transform Function", "Transfer Function", "None of the above"], correct: 0 },
-              { question: "What is the purpose of a Neural Network?", options: ["To model complex patterns", "To store data", "To generate reports", "None of the above"], correct: 0 },
-            ],
-            completed: false
-          },
-          {
-            id: 4,
-            title: "Deep Learning",
-            quiz: [
-              { question: "What is Deep Learning?", options: ["A subset of machine learning", "A type of programming language", "A database management system", "None of the above"], correct: 0 },
-              { question: "Which library is used for Deep Learning in Python?", options: ["TensorFlow", "Pandas", "NumPy", "Matplotlib"], correct: 0 },
-              { question: "What is a convolutional neural network?", options: ["A type of neural network", "A type of database", "A type of algorithm", "None of the above"], correct: 0 },
-              { question: "What is the purpose of a convolutional layer?", options: ["To extract features from data", "To store data", "To generate reports", "None of the above"], correct: 0 },
-              { question: "Which function is used to optimize the network?", options: ["Optimizer Function", "Activation Function", "Loss Function", "None of the above"], correct: 0 },
-            ],
-            completed: false
-          },
-          {
-            id: 5,
-            title: "Natural Language Processing",
-            quiz: [
-              { question: "What is Natural Language Processing (NLP)?", options: ["A field of AI", "A type of programming language", "A database management system", "None of the above"], correct: 0 },
-              { question: "Which library is used for NLP in Python?", options: ["NLTK", "Pandas", "NumPy", "Matplotlib"], correct: 0 },
-              { question: "What is tokenization?", options: ["Splitting text into tokens", "Combining text into a single string", "Both A and B", "None of the above"], correct: 0 },
-              { question: "What is the purpose of Named Entity Recognition (NER)?", options: ["To identify and classify entities in text", "To generate text", "To translate text", "None of the above"], correct: 0 },
-              { question: "Which function is used to stem words?", options: ["Stem Function", "Lemmatization Function", "Transform Function", "None of the above"], correct: 0 },
-            ],
-            completed: false
-          },
-          {
-            id: 6,
-            title: "Computer Vision",
-            quiz: [
-              { question: "What is Computer Vision?", options: ["A field of AI", "A type of programming language", "A database management system", "None of the above"], correct: 0 },
-              { question: "Which library is used for Computer Vision in Python?", options: ["OpenCV", "Pandas", "NumPy", "Matplotlib"], correct: 0 },
-              { question: "What is image classification?", options: ["Classifying images into categories", "Combining images into a single image", "Both A and B", "None of the above"], correct: 0 },
-              { question: "What is the purpose of object detection?", options: ["To identify and locate objects in an image", "To generate images", "To translate images", "None of the above"], correct: 0 },
-              { question: "Which function is used to resize images?", options: ["resize()", "transform()", "scale()", "None of the above"], correct: 0 },
-            ],
-            completed: false
-          },
-          {
-            id: 7,
-            title: "Reinforcement Learning",
-            quiz: [
-              { question: "What is Reinforcement Learning?", options: ["A field of AI", "A type of programming language", "A database management system", "None of the above"], correct: 0 },
-              { question: "Which library is used for Reinforcement Learning in Python?", options: ["Gym", "Pandas", "NumPy", "Matplotlib"], correct: 0 },
-              { question: "What is an agent in Reinforcement Learning?", options: ["An entity that interacts with the environment", "A type of algorithm", "A type of database", "None of the above"], correct: 0 },
-              { question: "What is the purpose of a reward function?", options: ["To provide feedback to the agent", "To store data", "To generate reports", "None of the above"], correct: 0 },
-              { question: "Which function is used to update the agent's policy?", options: ["Policy Update Function", "Value Update Function", "Reward Function", "None of the above"], correct: 0 },
-            ],
-            completed: false
-          },
-          {
-            id: 8,
-            title: "AI Ethics and Future",
-            quiz: [
-              { question: "What is AI Ethics?", options: ["The study of ethical issues in AI", "A type of programming language", "A database management system", "None of the above"], correct: 0 },
-              { question: "Which library is used for ethical AI in Python?", options: ["Fairlearn", "Pandas", "NumPy", "Matplotlib"], correct: 0 },
-              { question: "What is the purpose of AI Ethics?", options: ["To ensure AI is used responsibly", "To generate reports", "To store data", "None of the above"], correct: 0 },
-              { question: "What is the future of AI?", options: ["Continued advancements in technology", "Increased integration into daily life", "Potential ethical challenges", "All of the above"], correct: 3 },
-              { question: "Which organization is responsible for AI Ethics?", options: ["IEEE", "ISO", "W3C", "None of the above"], correct: 0 },
-            ],
-            completed: false
-          }
-        ];
-        
-       
+</div>
+
+
+  <script>
+    const lessons = [
+  {
+    id: 1,
+    title: "Introduction to Cybersecurity",
+    quiz: [
+      { question: "What is the main goal of cybersecurity?", options: ["Protecting data", "Learning new technologies", "Improving business performance", "None of the above"], correct: 0 },
+      { question: "Which of the following is a key aspect of cybersecurity?", options: ["Confidentiality", "Availability", "Integrity", "All of the above"], correct: 3 },
+      { question: "Which entity is responsible for enforcing cybersecurity laws?", options: ["Governments", "Hackers", "Corporations", "Users"], correct: 0 },
+      { question: "What does 'CIA Triad' stand for?", options: ["Confidentiality, Integrity, Availability", "Code, Integrity, Authentication", "Confidentiality, Integrity, Access", "Control, Information, Availability"], correct: 0 },
+      { question: "What is the most common form of cyber attack?", options: ["Phishing", "DDoS", "Malware", "Spyware"], correct: 0 },
+    ],
+    completed: false
+  },
+  {
+    id: 2,
+    title: "Types of Cyber Threats",
+    quiz: [
+      { question: "Which of the following is a type of malware?", options: ["Virus", "Trojan", "Worm", "All of the above"], correct: 3 },
+      { question: "What is phishing?", options: ["A type of hacking", "A type of malware", "A method of tricking users into giving personal info", "None of the above"], correct: 2 },
+      { question: "What is a DDoS attack?", options: ["Data-driven denial of service", "Distributed denial of service", "Direct denial of service", "None of the above"], correct: 1 },
+      { question: "Which cyber threat involves encrypting files for ransom?", options: ["Ransomware", "Spyware", "Trojan", "Worm"], correct: 0 },
+      { question: "What type of attack involves intercepting and altering communication?", options: ["Man-in-the-middle", "Phishing", "DoS", "Brute Force"], correct: 0 },
+    ],
+    completed: false
+  },
+  {
+    id: 3,
+    title: "Network Security Basics",
+    quiz: [
+      { question: "Which of these is a network security device?", options: ["Firewall", "Router", "Switch", "All of the above"], correct: 0 },
+      { question: "What is the purpose of a VPN?", options: ["Secure communication over the internet", "Increase browsing speed", "Track online activity", "None of the above"], correct: 0 },
+      { question: "Which protocol is used to secure data over a network?", options: ["HTTP", "HTTPS", "FTP", "SMTP"], correct: 1 },
+      { question: "What is a common method to prevent unauthorized access to a network?", options: ["Password", "Firewall", "Encryption", "All of the above"], correct: 3 },
+      { question: "What is the purpose of a DMZ in network security?", options: ["To separate internal and external networks", "To encrypt data", "To monitor network traffic", "None of the above"], correct: 0 },
+    ],
+    completed: false
+  },
+  {
+    id: 4,
+    title: "Cryptography and Encryption",
+    quiz: [
+      { question: "Which of these is a symmetric encryption algorithm?", options: ["AES", "RSA", "ECC", "Diffie-Hellman"], correct: 0 },
+      { question: "Which key is used for decryption in asymmetric encryption?", options: ["Private key", "Public key", "Symmetric key", "Shared key"], correct: 0 },
+      { question: "What does SSL stand for?", options: ["Secure Sockets Layer", "Secure Software Layer", "Simple Security Layer", "None of the above"], correct: 0 },
+      { question: "Which of the following is used for digital signatures?", options: ["Public key encryption", "Symmetric encryption", "Hashing", "All of the above"], correct: 0 },
+      { question: "What is a hash function?", options: ["A method for encrypting data", "A function that generates a fixed-size output from input data", "A type of encryption", "None of the above"], correct: 1 },
+    ],
+    completed: false
+  },
+  {
+    id: 5,
+    title: "Web Security & OWASP",
+    quiz: [
+      { question: "Which of the following is part of the OWASP Top 10?", options: ["SQL Injection", "Buffer Overflow", "Privilege Escalation", "None of the above"], correct: 0 },
+      { question: "What does SQL Injection target?", options: ["Web servers", "Databases", "Network infrastructure", "Operating systems"], correct: 1 },
+      { question: "What is Cross-Site Scripting (XSS)?", options: ["Injecting malicious scripts into web pages", "Changing network configurations", "Spoofing DNS entries", "None of the above"], correct: 0 },
+      { question: "What is the purpose of HTTPS?", options: ["To secure communication between the client and server", "To increase website speed", "To avoid spam", "None of the above"], correct: 0 },
+      { question: "Which of the following is used to prevent Cross-Site Request Forgery (CSRF)?", options: ["Anti-CSRF tokens", "VPN", "Firewall", "None of the above"], correct: 0 },
+    ],
+    completed: false
+  },
+  {
+    id: 6,
+    title: "Incident Response & Forensics",
+    quiz: [
+      { question: "What is the first step in incident response?", options: ["Contain the incident", "Identify the incident", "Recover systems", "Notify authorities"], correct: 1 },
+      { question: "What is the purpose of digital forensics?", options: ["Recover lost data", "Analyze data for criminal activity", "Monitor network traffic", "None of the above"], correct: 1 },
+      { question: "Which tool is commonly used for digital forensics?", options: ["Wireshark", "Kali Linux", "Autopsy", "Metasploit"], correct: 2 },
+      { question: "Which of these should be preserved in a digital forensics investigation?", options: ["Logs", "Network data", "Disk images", "All of the above"], correct: 3 },
+      { question: "Which is a major goal of incident response?", options: ["Minimize damage", "Identify vulnerabilities", "Gather evidence", "All of the above"], correct: 3 },
+    ],
+    completed: false
+  },
+  {
+    id: 7,
+    title: "Ethical Hacking Basics",
+    quiz: [
+      { question: "What is the primary goal of ethical hacking?", options: ["Find vulnerabilities before malicious hackers can exploit them", "Hack into systems for fun", "Gather personal data", "None of the above"], correct: 0 },
+      { question: "Which tool is commonly used for penetration testing?", options: ["Wireshark", "Metasploit", "Nmap", "All of the above"], correct: 3 },
+      { question: "What is a vulnerability scan?", options: ["Testing for open ports", "Scanning for weaknesses in systems", "Monitoring network traffic", "None of the above"], correct: 1 },
+      { question: "Which of the following is NOT an ethical hacking phase?", options: ["Reconnaissance", "Scanning", "Exploitation", "Malicious hacking"], correct: 3 },
+      { question: "What is social engineering?", options: ["Using technical skills to breach security", "Manipulating people to divulge confidential information", "Breaking into systems", "None of the above"], correct: 1 },
+    ],
+    completed: false
+  },
+  {
+    id: 8,
+    title: "Advanced Cybersecurity: Threat Hunting",
+    quiz: [
+      { question: "What is threat hunting?", options: ["Proactively searching for potential threats", "Waiting for threats to appear", "Monitoring network traffic", "All of the above"], correct: 0 },
+      { question: "Which tool is commonly used in threat hunting?", options: ["Wireshark", "Splunk", "Snort", "All of the above"], correct: 3 },
+      { question: "What is the goal of threat hunting?", options: ["Detect and mitigate threats early", "Minimize system performance", "Prevent data breaches", "None of the above"], correct: 0 },
+      { question: "Which phase comes after threat detection in threat hunting?", options: ["Incident response", "Analysis", "Containment", "Prevention"], correct: 1 },
+      { question: "Which of these is a key skill for a threat hunter?", options: ["Analytical thinking", "Network protocol knowledge", "Scripting", "All of the above"], correct: 3 },
+    ],
+    completed: false
+  },
+];
+
+
     let currentQuestion = {};
     let scores = {};
     let overallCompleted = 0;
@@ -507,9 +559,21 @@
       document.getElementById("overall-progress").innerText = `Overall Progress: ${overallProgress}%`;
     }
 
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("hide");
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('show');
+    });
+
+    // Show Selected Lesson
+    function showLesson(lessonId) {
+      const lessonContainers = document.querySelectorAll('.lesson-container');
+      lessonContainers.forEach(container => (container.style.display = 'none'));
+      const selectedLesson = document.getElementById(`lesson-${lessonId}`);
+      if (selectedLesson) selectedLesson.style.display = 'block';
+
+      // Close Sidebar on Mobile After Selection
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.remove('show');
     }
   </script>
 </body>
